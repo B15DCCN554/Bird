@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chi tiết loài chim</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1 th:text="${bird.name}"></h1>
+<img th:src="@{'/birds/images/' + ${bird.imageUrl}}" alt="Bird Image">
+<h3 th:text="'Loài: ' + ${bird.species}"></h3>
+<p th:text="${bird.description}"></p>
+<a href="/">Quay lại danh sách</a>
+</body>
+</html>
