@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chi tiết Chim</title>
+</head>
+<body>
+<h1>Chi tiết Chim</h1>
+<img th:src="${bird.imageUrl}" alt="Hình ảnh chim" width="300" /><br/>
+<p><strong>Tên:</strong> <span th:text="${bird.name}"></span></p>
+<p><strong>Loài:</strong> <span th:text="${bird.species}"></span></p>
+<p><strong>Tình trạng bảo tồn:</strong> <span th:text="${bird.conservationStatus}"></span></p>
+<a href="/">Quay lại</a>
+</body>
+</html>

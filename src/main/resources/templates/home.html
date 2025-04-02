@@ -11,6 +11,8 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="stylesheet" href="../css/styles.css"/>
   <style>
     body {
       color: #566787;
@@ -263,6 +265,101 @@
     });
   </script>
 </head>
+<header>
+  <div class="head-top">
+    <div class="container">
+      <div class="headtop-ct">
+        <div class="top flex-bet">
+          <div class="left flex">
+            <p class="call">
+              Hotline: <a href="tel:84438363906">(84-4)38363906</a>
+            </p>
+            <p class="address">
+              <a href="/"
+              >63 Nguyễn Văn Huyên, Nghĩa Đô, Cầu Giấy, Hà Nội</a
+              >
+            </p>
+          </div>
+          <div class="right flex">
+            <a href="mailto:bbtttndvn@gmail.com" class="email">Email</a>
+            <div class="lang flex">
+              <p>
+                Ngôn ngữ
+                <a href="javascript:" class="lang-vng" data-lang="vi"
+                ><img
+                        src="https://trungtamnhietdoivietnga.com.vn/html/style/images/lang-vn.png"
+                        alt="vn"
+                /></a>
+                <a href="javascript:" class="lang-vng" data-lang="ru"
+                ><img
+                        src="https://trungtamnhietdoivietnga.com.vn/html/style/images/lang-nga.png"
+                        alt="nga"
+                /></a>
+                <a href="javascript:" class="lang-vng" data-lang="en"
+                ><img
+                        src="https://trungtamnhietdoivietnga.com.vn/html/style/images/lang-anh.png"
+                        alt="anh"
+                /></a>
+              </p>
+            </div>
+            <div class="lang-mobile">
+              <p class="name-lang-mobile">
+                <a href="javascript:" class="lang-vng" data-lang="vi"
+                ><img src="/html/style/images/lang-vn.png" alt="vn"
+                /></a>
+              </p>
+              <div class="list-lang-mobile">
+                <a href="javascript:" class="lang-vng" data-lang="vi"
+                ><img src="/html/style/images/lang-vn.png" alt="vn" />
+                  Tiếng Việt</a
+                >
+                <a href="javascript:" class="lang-vng" data-lang="ru"
+                ><img src="/html/style/images/lang-nga.png" alt="nga" />
+                  Tiếng Nga</a
+                >
+                <a href="javascript:" class="lang-vng" data-lang="en"
+                ><img src="/html/style/images/lang-anh.png" alt="anh" />
+                  Tiếng Anh</a
+                >
+              </div>
+              <span class="btn-show-lang"></span>
+            </div>
+          </div>
+        </div>
+        <div class="bottom flex-bet">
+          <div class="logo">
+            <a href="/">
+              <img
+                      src="https://trungtamnhietdoivietnga.com.vn/Upload/Logo/logo5-vi.png"
+                      alt="TRUNG TÂM NHIỆT ĐỚI VIỆT - NGA"
+              />
+            </a>
+          </div>
+          <div class="search">
+            <form action="/tim-kiem" method="post">
+              <input placeholder="Tìm kiếm" name="q" />
+              <button>
+                <img
+                        src="https://trungtamnhietdoivietnga.com.vn/html/style/images/ic-search.png"
+                        alt="Tìm kiếm"
+                />
+              </button>
+            </form>
+          </div>
+          <div class="touch-menu"><span></span></div>
+          <div class="bg-black"></div>
+          <div class="ic-search">
+            <img
+                    src="https://trungtamnhietdoivietnga.com.vn/html/style/images/ic-search.png"
+                    alt="Tìm kiếm"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
 <body>
 <div class="container-xl">
   <div class="table-responsive">
@@ -270,7 +367,7 @@
       <div class="table-title">
         <div class="row">
           <div class="col-sm-6">
-            <h2>Manage <b>Employees</b></h2>
+            <h2>Manage <b>Bird</b></h2>
           </div>
           <div class="col-sm-6">
             <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
@@ -287,10 +384,16 @@
 								<label for="selectAll"></label>
 							</span>
           </th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th>Phone</th>
+          <th>Tên</th>
+          <th>Giới</th>
+          <th>Ngành</th>
+          <th>Lớp</th>
+          <th>Bộ</th>
+          <th>Họ</th>
+          <th>Chi</th>
+          <th>Loài</th>
+          <th>Ảnh</th>
+          <th>Mô Tả</th>
           <th>Actions</th>
         </tr>
         </thead>

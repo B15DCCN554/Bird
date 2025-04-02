@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="../css/stylePageSignIN_UP.css"/>
 </head>
 <body>
-<h2>Login</h2>
+<a href="/">&larr; Trở về trang chủ</a>
 
 <!-- Hiển thị thông báo lỗi -->
 <div th:if="${param.error}" style="color: red;">
@@ -17,14 +19,21 @@
     Đăng xuất thành công!
 </div>
 
-<form th:action="@{/login}" method="post">
-    <label>Username:</label>
-    <input type="text" name="username" required/>
-    <br/>
-    <label>Password:</label>
-    <input type="password" name="password" required/>
-    <br/>
-    <button type="submit">Login</button>
-</form>
+<div class="container" id="containerIn" style="width: 500px; min-height: 440px;">
+    <div class="form-container sign-in-container" style="width: 100%;">
+        <form th:action="@{/login}" method="post">
+            <h1>Login</h1>
+            <div class="social-container">
+                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span>or use your account</span>
+            <input type="text" placeholder="User" name="username" required />
+            <input type="password" placeholder="Password" name="password" required />
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

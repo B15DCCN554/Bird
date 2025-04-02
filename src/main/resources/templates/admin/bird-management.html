@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quản lý Chim</title>
+</head>
+<body>
+<h1>Quản lý Chim</h1>
+<a href="/admin/edit/0">Thêm Chim</a>
+<table>
+    <tr>
+        <th>Tên</th>
+        <th>Loài</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="bird : ${birds}">
+        <td th:text="${bird.name}"></td>
+        <td th:text="${bird.species}"></td>
+        <td>
+            <a th:href="@{/admin/edit/{id}(id=${bird.id})}">Sửa</a>
+            <a th:href="@{/admin/delete/{id}(id=${bird.id})}">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

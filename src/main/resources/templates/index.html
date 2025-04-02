@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Quản lý Chim</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/styles.css"/>
+    <style>
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+        .table-responsive {
+            margin: 30px 0;
+        }
+        .table-wrapper {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 3px;
+            min-width: 1000px;
+            box-shadow: 0 1px 1px rgba(0,0,0,.05);
+        }
+        .table-title {
+            padding-bottom: 15px;
+            background: #435d7d;
+            color: #fff;
+            padding: 16px 30px;
+            min-width: 100%;
+            margin: -20px -25px 10px;
+            border-radius: 3px 3px 0 0;
+        }
+        .table-title h2 {
+            margin: 5px 0 0;
+            font-size: 24px;
+        }
+        .table-title .btn-group {
+            float: right;
+        }
+        .table-title .btn {
+            color: #fff;
+            float: right;
+            font-size: 13px;
+            border: none;
+            min-width: 50px;
+            border-radius: 2px;
+            border: none;
+            outline: none !important;
+            margin-left: 10px;
+        }
+        .table-title .btn i {
+            float: left;
+            font-size: 21px;
+            margin-right: 5px;
+        }
+        .table-title .btn span {
+            float: left;
+            margin-top: 2px;
+        }
+        table.table tr th, table.table tr td {
+            border-color: #e9e9e9;
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+        table.table tr th:first-child {
+            width: 60px;
+        }
+        table.table tr th:last-child {
+            width: 100px;
+        }
+        table.table-striped tbody tr:nth-of-type(odd) {
+            background-color: #fcfcfc;
+        }
+        table.table-striped.table-hover tbody tr:hover {
+            background: #f5f5f5;
+        }
+        table.table th i {
+            font-size: 13px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        table.table td:last-child i {
+            opacity: 0.9;
+            font-size: 22px;
+            margin: 0 5px;
+        }
+        table.table td a {
+            font-weight: bold;
+            color: #566787;
+            display: inline-block;
+            text-decoration: none;
+            outline: none !important;
+        }
+        table.table td a:hover {
+            color: #2196F3;
+        }
+        table.table td a.edit {
+            color: #FFC107;
+        }
+        table.table td a.delete {
+            color: #F44336;
+        }
+        table.table td i {
+            font-size: 19px;
+        }
+        table.table .avatar {
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .pagination {
+            float: right;
+            margin: 0 0 5px;
+        }
+        .pagination li a {
+            border: none;
+            font-size: 13px;
+            min-width: 30px;
+            min-height: 30px;
+            color: #999;
+            margin: 0 2px;
+            line-height: 30px;
+            border-radius: 2px !important;
+            text-align: center;
+            padding: 0 6px;
+        }
+        .pagination li a:hover {
+            color: #666;
+        }
+        .pagination li.active a, .pagination li.active a.page-link {
+            background: #03A9F4;
+        }
+        .pagination li.active a:hover {
+            background: #0397d6;
+        }
+        .pagination li.disabled i {
+            color: #ccc;
+        }
+        .pagination li i {
+            font-size: 16px;
+            padding-top: 6px
+        }
+        .hint-text {
+            float: left;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        /* Custom checkbox */
+        .custom-checkbox {
+            position: relative;
+        }
+        .custom-checkbox input[type="checkbox"] {
+            opacity: 0;
+            position: absolute;
+            margin: 5px 0 0 3px;
+            z-index: 9;
+        }
+        .custom-checkbox label:before{
+            width: 18px;
+            height: 18px;
+        }
+        .custom-checkbox label:before {
+            content: '';
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: text-top;
+            background: white;
+            border: 1px solid #bbb;
+            border-radius: 2px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+        .custom-checkbox input[type="checkbox"]:checked + label:after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 3px;
+            width: 6px;
+            height: 11px;
+            border: solid #000;
+            border-width: 0 3px 3px 0;
+            transform: inherit;
+            z-index: 3;
+            transform: rotateZ(45deg);
+        }
+        .custom-checkbox input[type="checkbox"]:checked + label:before {
+            border-color: #03A9F4;
+            background: #03A9F4;
+        }
+        .custom-checkbox input[type="checkbox"]:checked + label:after {
+            border-color: #fff;
+        }
+        .custom-checkbox input[type="checkbox"]:disabled + label:before {
+            color: #b8b8b8;
+            cursor: auto;
+            box-shadow: none;
+            background: #ddd;
+        }
+        /* Modal styles */
+        .modal .modal-dialog {
+            max-width: 700px;
+        }
+        .modal .modal-header, .modal .modal-body, .modal .modal-footer {
+            padding: 20px 30px;
+        }
+        .modal .modal-content {
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        .modal .modal-footer {
+            background: #ecf0f1;
+            border-radius: 0 0 3px 3px;
+        }
+        .modal .modal-title {
+            display: inline-block;
+        }
+        .modal .form-control {
+            border-radius: 2px;
+            box-shadow: none;
+            border-color: #dddddd;
+        }
+        .modal textarea.form-control {
+            resize: vertical;
+        }
+        .modal .btn {
+            border-radius: 2px;
+            min-width: 100px;
+        }
+        .modal form label {
+            font-weight: normal;
+        }
+        th {
+            font-size: 15px; /* Điều chỉnh kích thước chữ theo mong muốn */
+            font-weight: bold; /* Tăng độ đậm để dễ nhìn */
+        }
+
+    </style>
+    <script>
+        $(document).ready(function(){
+            // Activate tooltip
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Select/Deselect checkboxes
+            var checkbox = $('table tbody input[type="checkbox"]');
+            $("#selectAll").click(function(){
+                if(this.checked){
+                    checkbox.each(function(){
+                        this.checked = true;
+                    });
+                } else{
+                    checkbox.each(function(){
+                        this.checked = false;
+                    });
+                }
+            });
+            checkbox.click(function(){
+                if(!this.checked){
+                    $("#selectAll").prop("checked", false);
+                }
+            });
+        });
+    </script>
+</head>
+<header>
+    <div class="head-top">
+        <div class="container">
+            <div class="headtop-ct">
+                <div class="top flex-bet">
+                    <div class="left flex">
+                        <p class="call">
+                            Hotline: <a href="tel:84438363906">(84-4)38363906</a>
+                        </p>
+                        <p class="address">
+                            <a href="/"
+                            >63 Nguyễn Văn Huyên, Nghĩa Đô, Cầu Giấy, Hà Nội</a
+                            >
+                        </p>
+                    </div>
+                    <div class="right flex">
+                        <a href="mailto:bbtttndvn@gmail.com" class="email">Email</a>
+                        <div class="lang flex">
+                            <p>
+                                Ngôn ngữ
+                                <a href="javascript:" class="lang-vng" data-lang="vi"
+                                ><img
+                                        src="https://trungtamnhietdoivietnga.com.vn/html/style/images/lang-vn.png"
+                                        alt="vn"
+                                /></a>
+                                <a href="javascript:" class="lang-vng" data-lang="ru"
+                                ><img
+                                        src="https://trungtamnhietdoivietnga.com.vn/html/style/images/lang-nga.png"
+                                        alt="nga"
+                                /></a>
+                                <a href="javascript:" class="lang-vng" data-lang="en"
+                                ><img
+                                        src="https://trungtamnhietdoivietnga.com.vn/html/style/images/lang-anh.png"
+                                        alt="anh"
+                                /></a>
+                            </p>
+                        </div>
+                        <div class="lang-mobile">
+                            <p class="name-lang-mobile">
+                                <a href="javascript:" class="lang-vng" data-lang="vi"
+                                ><img src="/html/style/images/lang-vn.png" alt="vn"
+                                /></a>
+                            </p>
+                            <div class="list-lang-mobile">
+                                <a href="javascript:" class="lang-vng" data-lang="vi"
+                                ><img src="/html/style/images/lang-vn.png" alt="vn"/>
+                                    Tiếng Việt</a
+                                >
+                                <a href="javascript:" class="lang-vng" data-lang="ru"
+                                ><img src="/html/style/images/lang-nga.png" alt="nga"/>
+                                    Tiếng Nga</a
+                                >
+                                <a href="javascript:" class="lang-vng" data-lang="en"
+                                ><img src="/html/style/images/lang-anh.png" alt="anh"/>
+                                    Tiếng Anh</a
+                                >
+                            </div>
+                            <span class="btn-show-lang"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom flex-bet">
+                    <div class="logo">
+                        <a href="/">
+                            <img
+                                    src="https://trungtamnhietdoivietnga.com.vn/Upload/Logo/logo5-vi.png"
+                                    alt="TRUNG TÂM NHIỆT ĐỚI VIỆT - NGA"
+                            />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="head-bottom">
+        <div class="container">
+            <div class="menu">
+                <ul>
+                    <li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <style>
+        .logout-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #cc0000;
+        }
+
+        /* Căn chỉnh tiêu đề và nút "Add New Bird" */
+        .table-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Khoảng cách giữa các phần tử */
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Khoảng cách giữa các input và nút */
+        }
+
+        .logout-form {
+            margin-left: 30px; /* Điều chỉnh khoảng cách giữa "Reset" và "Đăng xuất" */
+        }
+
+        .logout-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #cc0000;
+        }
+
+
+
+    </style>
+</header>
+<body>
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="container">
+                <div class="table-title">
+                    <a href="/"></a>
+                    <h2 class="m-0">Quản lý <b>Bird</b></h2>
+                    <a href="#addBirdModal" class="btn btn-success" data-toggle="modal">
+                        <i class="material-icons">&#xE147;</i> <span>Add New Bird</span>
+                    </a>
+                </div>
+
+                <div class="search-container">
+                    <form th:action="@{/}" method="get" class="search-form">
+                        <input type="text" name="ten" class="form-control" placeholder="Tìm theo tên" th:value="${ten}">
+                        <input type="text" name="bo" class="form-control" placeholder="Nhập bộ" th:value="${bo}">
+                        <input type="text" name="ho" class="form-control" placeholder="Nhập họ" th:value="${ho}">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <a href="/" class="btn btn-secondary">Reset</a>
+                    </form>
+
+                    <!-- Nút đăng xuất với khoảng cách sang phải -->
+                    <form th:action="@{/logout}" method="post" class="logout-form">
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
+                </div>
+
+            </div>
+            <div class="htvn-ct">
+                <div class="lst-htvn">
+                    <div class="slider">
+                        <div class="item" data-home="" th:each="bird : ${birds}">
+                            <div class="img">
+                                <a th:href="@{/bird/detail/{id}(id=${bird.id})}">
+                                    <img th:src="@{${bird.imageUrl}}" th:alt="${bird.ten}" style="width:100%; height:auto; object-fit:contain;" />
+                                </a>
+                                <p>Image URL: <span th:text="${bird.imageUrl}"></span></p>
+
+                            </div>
+                            <div class="text">
+                                <h3>
+                                    <a th:href="@{/bird/detail/{id}(id=${bird.id})}" th:text="${bird.ten}">Tên Chim</a>
+                                </h3>
+                                <!-- Hiển thị "Bộ" nếu có giá trị -->
+                                <p th:if="${bird.bo != null and bird.bo != ''}">
+                                    <strong>Bộ:</strong> <span th:text="${bird.bo}"></span>
+                                </p>
+
+                                <!-- Hiển thị "Họ" nếu có giá trị -->
+                                <p th:if="${bird.ho != null and bird.ho != ''}">
+                                    <strong>Họ:</strong> <span th:text="${bird.ho}"></span>
+                                </p>
+
+                                <p th:text="${bird.mota}">Mô tả ngắn gọn...</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="hint-text">
+                    Showing <b th:text="${birdPage.numberOfElements}"></b> out of <b th:text="${birdPage.totalElements}"></b> entries
+                </div>
+                <ul class="pagination">
+                    <!-- Nút Previous -->
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                        <a th:href="@{/birds(page=${currentPage - 1}, size=5, ten=${ten}, bo=${bo}, ho=${ho})}" class="page-link">Previous</a>
+                    </li>
+
+                    <!-- Hiển thị số trang -->
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:classappend="${i == currentPage} ? 'active'">
+                        <a th:href="@{/birds(page=${i}, size=5, ten=${ten}, bo=${bo}, ho=${ho})}" class="page-link" th:text="${i + 1}"></a>
+                    </li>
+
+                    <!-- Nút Next -->
+                    <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                        <a th:href="@{/birds(page=${currentPage + 1}, size=5, ten=${ten}, bo=${bo}, ho=${ho})}" class="page-link">Next</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+<footer>
+    <div class="menu-footer">
+        <div class="container">
+            <div class="menuft-ct">
+                <div class="item"><p class="name"><a href="/gioi-thieu">Giới thiệu</a></p>
+                    <p><a href="/gioi-thieu?t=lich-su-hinh-thanh">Lịch sử hình thành</a></p>
+                    <p><a href="/gioi-thieu?t=ban-lanh-dao">Ban Lãnh đạo</a></p>
+                    <p><a href="/chuc-nang">Chức năng</a></p>
+                    <p><a href="/gioi-thieu?t=co-cau-to-chuc">Cơ cấu tổ chức</a></p>
+                    <p><a href="/thanh-tuu">Thành tựu</a></p></div>
+                <div class="item"><p class="name"><a href="/cac-don-vi">Các đơn vị </a></p>
+                    <p><a href="/van-phong-phan-ban-viet-nam">Văn phòng Phân ban Việt Nam</a></p>
+                    <p><a href="/khoi-co-quan">Khối cơ quan</a></p>
+                    <p><a href="/vien-phan-vien-chi-nhanh">Khối đơn vị nghiên cứu</a></p></div>
+                <div class="item"><p class="name"><a href="/nangluc">Năng lực</a></p>
+                    <p><a href="/nang-luc-khoa-hoc">Nhân lực khoa học</a></p>
+                    <p><a href="/he-thong-phong-thi-nghiem">Hệ thống phòng thí nghiệm</a></p>
+                    <p><a href="/he-thong-tram-nghien-cuu-thu-nghiem">Hệ thống trạm nghiên cứu, thử nghiệm</a></p>
+                    <p><a href="/he-thong-tram-quan-trac">Hệ thống trạm quan trắc</a></p></div>
+                <div class="item"><p class="name"><a href="/tap-chi">Ấn phẩm</a></p>
+                    <p><a href="/tap-chi">Tạp chí</a></p>
+                    <p><a href="/tuyen-tap-sach-chuyen-khao">Tuyển tập, Sách chuyên khảo</a></p>
+                    <p><a href="/cong-bo-quoc-te">Công bố quốc tế</a></p>
+                    <p><a href="/cong-bo-trong-nuoc">Công bố trong nước</a></p></div>
+            </div>
+        </div>
+    </div>
+    <div class="detail-cpn">
+        <div class="container">
+            <div class="cpn">
+                <div class="item"><p class="name"><span><strong>TRUNG TÂM NHIỆT ĐỚI VIỆT - NGA</strong></span></p>
+                    <p><strong><span>Địa chỉ:</span> 63 Nguyễn Văn Huyên, Nghĩa Đô, Cầu Giấy, Hà Nội</strong></p>
+                    <p><strong><span>Tel:</span> (+8424) 38363906 - 069 514100</strong></p>
+                    <p><strong><span>Fax:</span>&nbsp;(+8424) 37562390-&nbsp;069.514.123</strong></p>
+                    <p><strong><span>Email:</span> bbtttndvn@gmail.com</strong></p>
+                    <p><strong><span>Website:</span> <a href="#"><span style="color:#3498db">www.trungtamnhietdoivietnga.com.vn</span></a></strong>
+                    </p></div>
+                <div class="item"><p class="name"><span style="font-size:14px">Giấy phép hoạt động:</span></p>
+                    <p><span style="font-size:14px">Quyết định số 1834/QĐ-CT ngày 07/9/2015 của TCCT</span></p>
+                    <p class="name"><span style="font-size:14px">Chịu trách nhiệm nội dung:</span></p>
+                    <p><span style="font-size:14px">Đại&nbsp;tá, TS. Nguyễn Phi Long&nbsp;- Phó Tổng Giám đốc, Trưởng Ban Biên tập</span>
+                    </p></div>
+                <div class="item"><p class="name">Liên kết Website</p>
+                    <form><select name="changeLinkLk" id="changeLinkLk">
+                        <option value="">Web Liên Kết</option>
+                        <option value="http://vrtc.org.vn">http://vrtc.org.vn</option>
+                        <option value="http://v-lab.com.vn">v-lab.com.vn</option>
+                        <option value="http://www.emalab.com.vn/">www.emalab.com.vn</option>
+                    </select></form>
+                    <div class="social"><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a> <a><i
+                            class="fa fa-twitter"></i></a> <a href="https://www.youtube.com/"><i
+                            class="fa fa-youtube-play"></i></a> <a><i class="fa fa-instagram"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".editBirdBtn").forEach(button => {
+            button.addEventListener("click", function () {
+                // Lấy dữ liệu từ `th:data-xxx`
+                document.getElementById("editId").value = this.getAttribute("data-id");
+                document.getElementById("editTen").value = this.getAttribute("data-ten");
+                document.getElementById("editGioi").value = this.getAttribute("data-gioi");
+                document.getElementById("editNganh").value = this.getAttribute("data-nganh");
+                document.getElementById("editLop").value = this.getAttribute("data-lop");
+                document.getElementById("editBo").value = this.getAttribute("data-bo");
+                document.getElementById("editHo").value = this.getAttribute("data-ho");
+                document.getElementById("editChi").value = this.getAttribute("data-chi");
+                document.getElementById("editLoai").value = this.getAttribute("data-loai");
+                document.getElementById("editTinhTrangBaoTon").value = this.getAttribute("data-tinhtrangbaoton");
+                document.getElementById("editMota").value = this.getAttribute("data-mota");
+
+                // Cập nhật ảnh hiện tại
+                let imageUrl = this.getAttribute("data-imageurl");
+                if (imageUrl) {
+                    document.getElementById("editImagePreview").src = imageUrl;
+                } else {
+                    document.getElementById("editImagePreview").src = "/images/default.jpg"; // Ảnh mặc định nếu không có ảnh
+                }
+            });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Xử lý khi bấm vào nút xóa
+        document.querySelectorAll(".deleteBirdBtn").forEach(button => {
+            button.addEventListener("click", function () {
+                // Lấy ID của chim
+                let birdId = this.getAttribute("data-id");
+
+                // Gán ID vào input ẩn trong modal
+                document.getElementById("deleteId").value = birdId;
+            });
+        });
+    });
+</script>
+
+</html>
