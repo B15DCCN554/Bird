@@ -3,6 +3,9 @@ package com.example.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "birds")
 @Getter
@@ -13,6 +16,7 @@ public class Bird {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String ten;
     private String gioi;
     private String nganh;
@@ -21,8 +25,14 @@ public class Bird {
     private String ho;
     private String chi;
     private String loai;
+
     @Column(columnDefinition = "TEXT")
     private String mota;
+
     private String tinhTrangBaoTon;
-    private String imageUrl;
+
+    @OneToMany(mappedBy = "bird", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OrderBy("stt ASC")
+    private List<Image> images = new ArrayList<>();
+
 }

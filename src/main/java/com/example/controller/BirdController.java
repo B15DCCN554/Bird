@@ -1,7 +1,10 @@
 package com.example.controller;
 
+import com.example.config.AppConfig;
 import com.example.model.Bird;
+import com.example.model.Image;
 import com.example.service.BirdService;
+import com.example.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +29,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class BirdController {
     @Autowired
     private BirdService birdService;
+
+    @Autowired
+    private ImageService imageService;
+
+    @Autowired
+    private AppConfig appConfig;
+
     private static final String UPLOAD_DIR = "uploads/"; // Thư mục lưu ảnh
 
     @GetMapping()
@@ -51,51 +64,106 @@ public class BirdController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", birdPage.getTotalPages());
         model.addAttribute("startIndex", startIndex);
+        model.addAttribute("backgroundImageUrlFooter", appConfig.getBackgroundImageUrlFooter());
+        model.addAttribute("backgroundImageUrlHeader", appConfig.getBackgroundImageUrlHeader());
+        model.addAttribute("appTitle", appConfig.getAppTitle());
         return "birds";
     }
 
     @PostMapping("/add")
-    public String addBird(@ModelAttribute Bird bird, @RequestParam("imageFile") MultipartFile imageFile) {
-        if (!imageFile.isEmpty()) {
-            try {
-                // Tạo thư mục nếu chưa có
-                File uploadDir = new File(UPLOAD_DIR);
-                if (!uploadDir.exists()) uploadDir.mkdirs();
+    public String addBird(@ModelAttribute Bird bird, @RequestParam("imageFile") MultipartFile imageFile
+            , @RequestParam("imageFile1") MultipartFile imageFile1
+            , @RequestParam("imageFile2") MultipartFile imageFile2
+            , @RequestParam("imageFile3") MultipartFile imageFile3
+            , @RequestParam("imageFile4") MultipartFile imageFile4) {
+        Bird bird1 = birdService.saveBird(bird);
 
-                // Lưu ảnh vào thư mục uploads/
-                String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
-                Path filePath = Paths.get(UPLOAD_DIR + fileName);
-                Files.write(filePath, imageFile.getBytes());
-
-                bird.setImageUrl("/images/" + fileName);
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            if(!imageFile.isEmpty()){
+                imageService.addImage(bird1.getId(), imageFile, 0);
             }
+            if(!imageFile1.isEmpty()){
+                imageService.addImage(bird1.getId(), imageFile1, 1);
+            }
+            if(!imageFile2.isEmpty()){
+                imageService.addImage(bird1.getId(), imageFile2, 2);
+            }
+            if(!imageFile3.isEmpty()){
+                imageService.addImage(bird1.getId(), imageFile3, 3);
+            }
+            if(!imageFile4.isEmpty()){
+                imageService.addImage(bird1.getId(), imageFile4, 4);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        birdService.saveBird(bird);
         return "redirect:/birds";
     }
 
-    @PostMapping("/update")
-    public String updateBird(@ModelAttribute Bird bird, @RequestParam("imageFile") MultipartFile imageFile) {
-        if (!imageFile.isEmpty()) {
-            try {
-                // Lưu ảnh mới vào thư mục
-                String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
-                Path filePath = Paths.get(UPLOAD_DIR + fileName);
-                Files.write(filePath, imageFile.getBytes());
 
-                bird.setImageUrl("/images/" + fileName); // Lưu ảnh mới
-            } catch (Exception e) {
-                e.printStackTrace();
+    @PostMapping("/update")
+    public String updateBird(@ModelAttribute Bird bird, @RequestParam("imageFile") MultipartFile imageFile
+            , @RequestParam("imageFile1") MultipartFile imageFile1
+            , @RequestParam("imageFile2") MultipartFile imageFile2
+            , @RequestParam("imageFile3") MultipartFile imageFile3
+            , @RequestParam("imageFile4") MultipartFile imageFile4) {
+        Bird existingBird = birdService.getBirdById(bird.getId());
+        bird.setImages(existingBird.getImages());
+        Bird bird1 = birdService.saveBird(bird);
+        try {
+            if(!imageFile.isEmpty()){
+                imageService.addImage(bird1.getId(), imageFile, 0);
             }
-        } else {
-            // Không chọn ảnh mới => giữ ảnh cũ
-            Bird existingBird = birdService.getBirdById(bird.getId());
-            bird.setImageUrl(existingBird.getImageUrl());
+            if(!imageFile1.isEmpty()){
+                imageService.addImage(bird1.getId(), imageFile1, 1);
+            }
+            if(!imageFile2.isEmpty()){
+                imageService.addImage(bird1.getId(), imageFile2, 2);
+            }
+            if(!imageFile3.isEmpty()){
+                imageService.addImage(bird1.getId(), imageFile3, 3);
+            }
+            if(!imageFile4.isEmpty()){
+                imageService.addImage(bird1.getId(), imageFile4, 4);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        birdService.saveBird(bird);
         return "redirect:/birds";
+    }
+//    @PostMapping("/update")
+//    public String updateBird(@ModelAttribute Bird bird, @RequestParam("imageFile") MultipartFile imageFile) {
+//        if (!imageFile.isEmpty()) {
+//            try {
+//                // Lưu ảnh mới vào thư mục
+//                String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
+//                Path filePath = Paths.get(UPLOAD_DIR + fileName);
+//                Files.write(filePath, imageFile.getBytes());
+//
+//                bird.setImageUrl("/images/" + fileName); // Lưu ảnh mới
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//            // Không chọn ảnh mới => giữ ảnh cũ
+//            Bird existingBird = birdService.getBirdById(bird.getId());
+//            bird.setImageUrl(existingBird.getImageUrl());
+//        }
+//        birdService.saveBird(bird);
+//        return "redirect:/birds";
+//    }
+
+    @GetMapping("/image/{imageId}")
+    @ResponseBody
+    public ResponseEntity<byte[]> getImage(@PathVariable Long imageId) {
+        System.out.println(imageId);
+        Optional<Image> imageOptional = imageService.getImageById(imageId);
+        if (imageOptional.isPresent()) {
+            Image image = imageOptional.get();
+            System.out.println(image.getId());
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image.getImageData());
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/images/{filename}")

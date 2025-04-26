@@ -1,0 +1,27 @@
+server:
+  port: 8090
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: demo
+  datasource:
+    url: jdbc:mysql://localhost:3306/bird_db
+    username: root
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+
+app:
+  background-image-url-header:
+  background-image-url-footer:
+  title: "Ứng dụng quản lý chim"

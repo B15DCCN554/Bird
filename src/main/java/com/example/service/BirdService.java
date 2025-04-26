@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.model.Bird;
 import com.example.repository.BirdRepository;
+import com.example.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,9 @@ public class BirdService {
     @Autowired
     private BirdRepository repository;
 
+    @Autowired
+    private ImageRepository imageRepository;
+
     public List<Bird> getAllBirds() {
         return repository.findAll();
     }
@@ -24,13 +28,14 @@ public class BirdService {
     }
 
 
-    public void saveBird(Bird bird) {
-        repository.save(bird);
+    public Bird saveBird(Bird bird) {
+       return repository.save(bird);
     }
 
     public void deleteBird(Long id) {
         repository.deleteById(id);
     }
+
     public Bird getBirdById(Long id) {
         return repository.findById(id).orElse(null);
     }

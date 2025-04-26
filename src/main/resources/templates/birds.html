@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/responsive.css"/>
     <link rel="stylesheet" href="../css/styles.css"/>
     <style>
         body {
@@ -242,7 +242,23 @@
             font-size: 15px; /* Điều chỉnh kích thước chữ theo mong muốn */
             font-weight: bold; /* Tăng độ đậm để dễ nhìn */
         }
+        .head-top {
+            background-size: auto 100%; /* Giữ nguyên tỉ lệ chiều cao 100% */
+            /*background-repeat: no-repeat; !* Ngăn lặp ảnh *!*/
+            background-position: center; /* Căn giữa theo chiều ngang */
+            min-height: 140px; /* Chiều cao tối thiểu (điều chỉnh giá trị theo nhu cầu) */
+            width: 100%; /* Giữ nguyên chiều rộng gốc */
+        }
 
+        /* Ẩn logo (nếu chưa áp dụng) */
+        .head-top .logo img {
+            display: none;
+        }
+
+        /* Đảm bảo container không giới hạn chiều cao */
+        .container, .headtop-ct, .flex-bet {
+            height: 100%; /* Kế thừa chiều cao từ .head-top */
+        }
     </style>
     <script>
         $(document).ready(function(){
@@ -271,42 +287,17 @@
     </script>
 </head>
 <header>
-    <div class="head-top">
+    <div class="head-top" th:style="${backgroundImageUrlHeader != null and !#strings.isEmpty(backgroundImageUrlHeader) ?
+               'background-image: url(/images-local/' + backgroundImageUrlHeader + ')' :
+               'background-image: url(https://trungtamnhietdoivietnga.com.vn/html/style/images/bg-headtop.png)'}">
         <div class="container">
             <div class="headtop-ct">
-                <div class="top flex-bet">
-                    <div class="left flex">
-                        <p class="call">
-                            Hotline: <a href="tel:84438363906">(84-4)38363906</a>
-                        </p>
-                        <p class="address">
-                            <a href="/">63 Nguyễn Văn Huyên, Nghĩa Đô, Cầu Giấy, Hà Nội</a>
-                        </p>
-                    </div>
-                    <div class="right flex">
-                        <a href="mailto:bbtttndvn@gmail.com" class="email">Email</a>
-                        <div class="lang flex">
-                            <p>
-                                Ngôn ngữ
-                                <a href="javascript:" class="lang-vng" data-lang="vi"><img
-                                        src="https://trungtamnhietdoivietnga.com.vn/html/style/images/lang-vn.png"
-                                        alt="vn" /></a>
-                                <a href="javascript:" class="lang-vng" data-lang="ru"><img
-                                        src="https://trungtamnhietdoivietnga.com.vn/html/style/images/lang-nga.png"
-                                        alt="nga" /></a>
-                                <a href="javascript:" class="lang-vng" data-lang="en"><img
-                                        src="https://trungtamnhietdoivietnga.com.vn/html/style/images/lang-anh.png"
-                                        alt="anh" /></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
                 <div class="bottom flex-bet">
                     <div class="logo">
-                        <a href="/">
-                            <img src="https://trungtamnhietdoivietnga.com.vn/Upload/Logo/logo5-vi.png"
-                                 alt="TRUNG TÂM NHIỆT ĐỚI VIỆT - NGA" />
-                        </a>
+<!--                        <a href="/">-->
+<!--                            <img src="https://trungtamnhietdoivietnga.com.vn/Upload/Logo/logo5-vi.png"-->
+<!--                                 alt="TRUNG TÂM NHIỆT ĐỚI VIỆT - NGA"/>-->
+<!--                        </a>-->
                     </div>
                     <div class="touch-menu"><span></span></div>
                     <div class="bg-black"></div>
@@ -315,75 +306,74 @@
         </div>
     </div>
     <style>
-    .logout-btn {
-        background-color: #ff4d4d;
-        color: white;
-        border: none;
-        padding: 8px 12px;
-        cursor: pointer;
-        font-size: 14px;
-        border-radius: 5px;
-        transition: 0.3s;
-    }
+        .logout-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
 
-    .logout-btn:hover {
-        background-color: #cc0000;
-    }
+        .logout-btn:hover {
+            background-color: #cc0000;
+        }
 
-    /* Căn chỉnh tiêu đề và nút "Add New Bird" */
-    .table-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
-    }
+        /* Căn chỉnh tiêu đề và nút "Add New Bird" */
+        .table-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
 
-    .search-container {
-        display: flex;
-        align-items: center;
-        gap: 10px; /* Khoảng cách giữa các phần tử */
-    }
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Khoảng cách giữa các phần tử */
+        }
 
-    .search-form {
-        display: flex;
-        align-items: center;
-        gap: 10px; /* Khoảng cách giữa các input và nút */
-    }
+        .search-form {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Khoảng cách giữa các input và nút */
+        }
 
-    .logout-form {
-        margin-left: 30px; /* Điều chỉnh khoảng cách giữa "Reset" và "Đăng xuất" */
-    }
+        .logout-form {
+            margin-left: 30px; /* Điều chỉnh khoảng cách giữa "Reset" và "Đăng xuất" */
+        }
 
-    .logout-btn {
-        background-color: #ff4d4d;
-        color: white;
-        border: none;
-        padding: 8px 12px;
-        cursor: pointer;
-        font-size: 14px;
-        border-radius: 5px;
-        transition: 0.3s;
-    }
+        .logout-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
 
-    .logout-btn:hover {
-        background-color: #cc0000;
-    }
-
+        .logout-btn:hover {
+            background-color: #cc0000;
+        }
 
 
     </style>
 </header>
 <body>
 <div class="container-xl">
-        <div class="table-responsive">
+    <div class="table-responsive">
         <div class="table-wrapper">
             <div class="container">
                 <div class="table-title">
-                    <a href="/"><h3 style = "color:white"><span class="m-0">Trang chủ</span></h3>
+                    <a href="/"><h3 style="color:white"><span class="m-0">Trang chủ</span></h3>
                     </a>
                     <h2 class="m-0">Quản lý <b>Bird</b></h2>
                     <a href="#addBirdModal" class="btn btn-success" data-toggle="modal">
-                        <i class="material-icons">&#xE147;</i> <span>Add New Bird</span>
+                        <i class="material-icons">&#xE147;</i> <span>Thêm loài</span>
                     </a>
                 </div>
 
@@ -392,13 +382,13 @@
                         <input type="text" name="ten" class="form-control" placeholder="Tìm theo tên" th:value="${ten}">
                         <input type="text" name="bo" class="form-control" placeholder="Nhập bộ" th:value="${bo}">
                         <input type="text" name="ho" class="form-control" placeholder="Nhập họ" th:value="${ho}">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                        <a href="/birds" class="btn btn-secondary">Reset</a>
+                        <button type="submit" class="btn btn-primary" style="white-space: nowrap;">Tìm kiếm</button>
+                        <a href="/birds" class="btn btn-secondary" style="white-space: nowrap;">Làm mới</a>
                     </form>
 
                     <!-- Nút đăng xuất với khoảng cách sang phải -->
                     <form th:action="@{/logout}" method="post" class="logout-form">
-                        <button type="submit" class="logout-btn">Logout</button>
+                        <button type="submit" class="logout-btn">Đăng xuất</button>
                     </form>
                 </div>
 
@@ -419,7 +409,7 @@
                     <th>Loài</th>
                     <th>Tình trạng</th>
                     <th>Ảnh</th>
-                    <th>Actions</th>
+                    <th>Cập nhật</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -436,7 +426,9 @@
                     <td th:text="${bird.loai}">Loài</td>
                     <td th:text="${bird.tinhTrangBaoTon}">Tình trạng bảo tồn</td>
                     <td>
-                        <img th:src="@{${bird.imageUrl}}" alt="Hình ảnh" width="50" height="50">
+                        <img th:if="${bird.images != null and not #lists.isEmpty(bird.images)}"
+                             th:src="@{/birds/image/{id}(id=${bird.images[0].id})}"
+                             alt="Hình ảnh" width="50" height="50">
                     </td>
                     <td>
                         <a href="#editBirdModal" class="edit editBirdBtn" data-toggle="modal"
@@ -451,11 +443,16 @@
                            th:data-loai="${bird.loai}"
                            th:data-tinhtrangbaoton="${bird.tinhTrangBaoTon}"
                            th:data-mota="${bird.mota}"
-                           th:data-imageurl="${bird.imageUrl}">
+                           th:data-imageurl0="${(bird.images != null and not #lists.isEmpty(bird.images)) ? '/birds/image/' + bird.images[0].id : null}"
+                           th:data-imageurl1="${(bird.images != null and #lists.size(bird.images) > 1) ? '/birds/image/' + bird.images[1].id : null}"
+                           th:data-imageurl2="${(bird.images != null and #lists.size(bird.images) > 2) ? '/birds/image/' + bird.images[2].id : null}"
+                           th:data-imageurl3="${(bird.images != null and #lists.size(bird.images) > 3) ? '/birds/image/' + bird.images[3].id : null}"
+                           th:data-imageurl4="${(bird.images != null and #lists.size(bird.images) > 4) ? '/birds/image/' + bird.images[4].id : null}">
                             <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                         </a>
 
-                        <a href="#deleteBirdModal" class="delete deleteBirdBtn" data-toggle="modal" th:data-id="${bird.id}">
+                        <a href="#deleteBirdModal" class="delete deleteBirdBtn" data-toggle="modal"
+                           th:data-id="${bird.id}">
                             <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                         </a>
                     </td>
@@ -465,26 +462,31 @@
             </table>
             <div class="clearfix">
                 <div class="hint-text">
-                    Showing <b th:text="${birdPage.numberOfElements}"></b> out of <b th:text="${birdPage.totalElements}"></b> entries
+                    Showing <b th:text="${birdPage.numberOfElements}"></b> out of <b
+                        th:text="${birdPage.totalElements}"></b> entries
                 </div>
-                <ul class="pagination">
-                    <!-- Nút Previous -->
-                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
-                        <a th:href="@{/birds(page=${currentPage - 1}, size=5, ten=${ten}, bo=${bo}, ho=${ho})}" class="page-link">Previous</a>
-                    </li>
+                <div th:if="${birdPage.totalElements > 0}">
+                    <ul class="pagination">
+                        <!-- Nút Previous -->
+                        <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                            <a th:href="@{/birds(page=${currentPage - 1}, size=5, ten=${ten}, bo=${bo}, ho=${ho})}"
+                               class="page-link">Previous</a>
+                        </li>
 
-                    <!-- Hiển thị số trang -->
-                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
-                        th:classappend="${i == currentPage} ? 'active'">
-                        <a th:href="@{/birds(page=${i}, size=5, ten=${ten}, bo=${bo}, ho=${ho})}" class="page-link" th:text="${i + 1}"></a>
-                    </li>
+                        <!-- Hiển thị số trang -->
+                        <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                            th:classappend="${i == currentPage} ? 'active'">
+                            <a th:href="@{/birds(page=${i}, size=5, ten=${ten}, bo=${bo}, ho=${ho})}" class="page-link"
+                               th:text="${i + 1}"></a>
+                        </li>
 
-                    <!-- Nút Next -->
-                    <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
-                        <a th:href="@{/birds(page=${currentPage + 1}, size=5, ten=${ten}, bo=${bo}, ho=${ho})}" class="page-link">Next</a>
-                    </li>
-                </ul>
-
+                        <!-- Nút Next -->
+                        <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                            <a th:href="@{/birds(page=${currentPage + 1}, size=5, ten=${ten}, bo=${bo}, ho=${ho})}"
+                               class="page-link">Next</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
         </div>
@@ -552,7 +554,7 @@
                         <!-- Hàng 4: Mô tả -->
                         <div class="row mt-2">
                             <div class="col-md-12">
-                                <label>Mô tả</label>
+                                <label>Đặc điểm Sinh học Sinh thái</label>
                                 <textarea class="form-control" rows="3" th:field="*{mota}"></textarea>
                             </div>
                         </div>
@@ -560,8 +562,33 @@
                         <!-- Hàng 5: Chọn ảnh -->
                         <div class="row mt-2">
                             <div class="col-md-12">
-                                <label>Hình ảnh</label>
+                                <button type="button" class="btn btn-primary" id="addImageBtn">Thêm ảnh</button>
+                            </div>
+
+                            <!-- Trường chọn ảnh 1 sẽ hiển thị mặc định -->
+                            <div class="form-group" style="margin-left: 15px">
+                                <label>Ảnh chính</label>
                                 <input type="file" class="form-control-file" name="imageFile" accept="image/*">
+                            </div>
+
+                            <!-- Các trường chọn ảnh ẩn ban đầu -->
+                            <div id="imageFields" class="col-md-12 mt-3" style="display: none;">
+                                <div class="form-group">
+                                    <label>Ảnh phụ 1</label>
+                                    <input type="file" class="form-control-file" name="imageFile1" accept="image/*">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ảnh phụ 2</label>
+                                    <input type="file" class="form-control-file" name="imageFile2" accept="image/*">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ảnh phụ 3</label>
+                                    <input type="file" class="form-control-file" name="imageFile3" accept="image/*">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ảnh phụ 4</label>
+                                    <input type="file" class="form-control-file" name="imageFile4" accept="image/*">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -576,6 +603,7 @@
         </div>
     </div>
 </div>
+
 
 
 <div id="editBirdModal" class="modal fade">
@@ -638,16 +666,16 @@
 
                         <div class="row mt-2">
                             <div class="col-md-12">
-                                <label>Mô tả</label>
+                                <label>Đặc điểm Sinh học Sinh thái</label>
                                 <textarea class="form-control" id="editMota" name="mota" rows="3"></textarea>
                             </div>
                         </div>
 
                         <div class="row mt-2">
                             <div class="col-md-6">
-                                <label>Ảnh hiện tại</label>
+                                <label>Ảnh chính</label>
                                 <div>
-                                    <img id="editImagePreview" src="" alt="Hình ảnh" width="100" height="100">
+                                    <img id="editImagePreview0" src="" alt="Hình ảnh" width="100" height="100">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -655,6 +683,56 @@
                                 <input type="file" class="form-control-file" name="imageFile" accept="image/*">
                             </div>
                         </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <label>Ảnh phụ 1</label>
+                                <div>
+                                    <img id="editImagePreview1" src="" alt="Hình ảnh" width="100" height="100">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Chọn ảnh mới</label>
+                                <input type="file" class="form-control-file" name="imageFile1" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <label>Ảnh phụ 2</label>
+                                <div>
+                                    <img id="editImagePreview2" src="" alt="Hình ảnh" width="100" height="100">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Chọn ảnh mới</label>
+                                <input type="file" class="form-control-file" name="imageFile2" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <label>Ảnh phụ 3</label>
+                                <div>
+                                    <img id="editImagePreview3" src="" alt="Hình ảnh" width="100" height="100">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Chọn ảnh mới</label>
+                                <input type="file" class="form-control-file" name="imageFile3" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <label>Ảnh phụ 4</label>
+                                <div>
+                                    <img id="editImagePreview4" src="" alt="Hình ảnh" width="100" height="100">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Chọn ảnh mới</label>
+                                <input type="file" class="form-control-file" name="imageFile4" accept="image/*">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -693,32 +771,72 @@
 
 </body>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".editBirdBtn").forEach(button => {
-            button.addEventListener("click", function () {
-                // Lấy dữ liệu từ `th:data-xxx`
-                document.getElementById("editId").value = this.getAttribute("data-id");
-                document.getElementById("editTen").value = this.getAttribute("data-ten");
-                document.getElementById("editGioi").value = this.getAttribute("data-gioi");
-                document.getElementById("editNganh").value = this.getAttribute("data-nganh");
-                document.getElementById("editLop").value = this.getAttribute("data-lop");
-                document.getElementById("editBo").value = this.getAttribute("data-bo");
-                document.getElementById("editHo").value = this.getAttribute("data-ho");
-                document.getElementById("editChi").value = this.getAttribute("data-chi");
-                document.getElementById("editLoai").value = this.getAttribute("data-loai");
-                document.getElementById("editTinhTrangBaoTon").value = this.getAttribute("data-tinhtrangbaoton");
-                document.getElementById("editMota").value = this.getAttribute("data-mota");
+    document.getElementById("addImageBtn").addEventListener("click", function() {
+        var imageFields = document.getElementById("imageFields");
+        if (imageFields.style.display === "none") {
+            imageFields.style.display = "block";
+        } else {
+            imageFields.style.display = "none";
+        }
+    });
 
-                // Cập nhật ảnh hiện tại
-                let imageUrl = this.getAttribute("data-imageurl");
-                if (imageUrl) {
-                    document.getElementById("editImagePreview").src = imageUrl;
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".editBirdBtn").forEach(button => {
+        button.addEventListener("click", function () {
+            // Lấy dữ liệu từ `th:data-xxx`
+            document.getElementById("editId").value = this.getAttribute("data-id");
+            document.getElementById("editTen").value = this.getAttribute("data-ten");
+            document.getElementById("editGioi").value = this.getAttribute("data-gioi");
+            document.getElementById("editNganh").value = this.getAttribute("data-nganh");
+            document.getElementById("editLop").value = this.getAttribute("data-lop");
+            document.getElementById("editBo").value = this.getAttribute("data-bo");
+            document.getElementById("editHo").value = this.getAttribute("data-ho");
+            document.getElementById("editChi").value = this.getAttribute("data-chi");
+            document.getElementById("editLoai").value = this.getAttribute("data-loai");
+            document.getElementById("editTinhTrangBaoTon").value = this.getAttribute("data-tinhtrangbaoton");
+            document.getElementById("editMota").value = this.getAttribute("data-mota");
+
+            // Lấy dữ liệu về ảnh
+            const imageUrls = [
+                this.getAttribute("data-imageurl0"),
+                this.getAttribute("data-imageurl1"),
+                this.getAttribute("data-imageurl2"),
+                this.getAttribute("data-imageurl3"),
+                this.getAttribute("data-imageurl4")
+            ];
+
+            // Cập nhật ảnh từ URL (nếu có)
+            imageUrls.forEach((imageUrl, index) => {
+                const imgElement = document.getElementById(`editImagePreview${index}`);
+
+                if (imgElement) { // Kiểm tra nếu phần tử tồn tại
+                    if (imageUrl) {
+                        imgElement.src = imageUrl;
+                    } else {
+                        // Gọi API lấy ảnh nếu không có URL
+                        if (imageUrl) {
+                            fetch(`/birds/image/${imageUrl}`)
+                                .then(response => response.blob())
+                                .then(imageBlob => {
+                                    const imageObjectURL = URL.createObjectURL(imageBlob);
+                                    imgElement.src = imageObjectURL;
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching image:', error);
+                                    imgElement.src = "/images/default.jpg"; // Ảnh mặc định nếu lỗi
+                                });
+                        } else {
+                            imgElement.src = "/images/default.jpg"; // Ảnh mặc định nếu không có ảnh
+                        }
+                    }
                 } else {
-                    document.getElementById("editImagePreview").src = "/images/default.jpg"; // Ảnh mặc định nếu không có ảnh
+                    console.error(`Không tìm thấy phần tử với ID: editImagePreview${index}`);
                 }
             });
         });
     });
+});
+
 
     document.addEventListener("DOMContentLoaded", function () {
         // Xử lý khi bấm vào nút xóa
