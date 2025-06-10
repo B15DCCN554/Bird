@@ -207,7 +207,7 @@
         }
         /* Modal styles */
         .modal .modal-dialog {
-            max-width: 700px;
+            max-width: 850px;
         }
         .modal .modal-header, .modal .modal-body, .modal .modal-footer {
             padding: 20px 30px;
@@ -405,7 +405,7 @@
                     <th>Lớp</th>
                     <th>Bộ</th>
                     <th>Họ</th>
-                    <th>Chi</th>
+                    <th>Giống</th>
                     <th>Loài</th>
                     <th>Tình trạng</th>
                     <th>Ảnh</th>
@@ -441,6 +441,8 @@
                            th:data-ho="${bird.ho}"
                            th:data-chi="${bird.chi}"
                            th:data-loai="${bird.loai}"
+                           th:data-shst="${bird.shst}"
+                           th:data-nguonDanTL="${bird.nguonDanTL}"
                            th:data-tinhtrangbaoton="${bird.tinhTrangBaoTon}"
                            th:data-mota="${bird.mota}"
                            th:data-imageurl0="${(bird.images != null and not #lists.isEmpty(bird.images)) ? '/birds/image/' + bird.images[0].id : null}"
@@ -538,7 +540,7 @@
                         <!-- Hàng 3 -->
                         <div class="row mt-2">
                             <div class="col-md-4">
-                                <label>Chi</label>
+                                <label>Giống</label>
                                 <input type="text" class="form-control" th:field="*{chi}">
                             </div>
                             <div class="col-md-4">
@@ -550,14 +552,45 @@
                                 <input type="text" class="form-control" th:field="*{tinhTrangBaoTon}">
                             </div>
                         </div>
-
                         <!-- Hàng 4: Mô tả -->
                         <div class="row mt-2">
                             <div class="col-md-12">
-                                <label>Đặc điểm Sinh học Sinh thái</label>
+                                <label>Mô tả</label>
                                 <textarea class="form-control" rows="3" th:field="*{mota}"></textarea>
                             </div>
                         </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <label>Đặc điểm Sinh học Sinh thái</label>
+                                <textarea class="form-control" rows="3" th:field="*{shst}"></textarea>
+                            </div>
+                        </div>
+<!--                        <div class="row mt-2">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <label>Đặc điểm Sinh thái</label>-->
+<!--                                <textarea class="form-control" rows="3" th:field="*{sinhThai}"></textarea>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <label>Nguồn dẫn tài liệu</label>
+                                <textarea class="form-control" rows="3" th:field="*{nguonDanTL}"></textarea>
+                            </div>
+                        </div>
+<!--                        <div class="row mt-2">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <label>Giá trị bảo tồn</label>-->
+<!--                                <input type="text" class="form-control" th:field="*{gtbt}">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row mt-2">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <label>Nguồn dẫn tài liệu</label>-->
+<!--                                <textarea class="form-control" rows="3" th:field="*{nguonDanTL}"></textarea>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
 
                         <!-- Hàng 5: Chọn ảnh -->
                         <div class="row mt-2">
@@ -651,7 +684,7 @@
 
                         <div class="row mt-2">
                             <div class="col-md-4">
-                                <label>Chi</label>
+                                <label>Giống</label>
                                 <input type="text" class="form-control" id="editChi" name="chi">
                             </div>
                             <div class="col-md-4">
@@ -666,10 +699,45 @@
 
                         <div class="row mt-2">
                             <div class="col-md-12">
-                                <label>Đặc điểm Sinh học Sinh thái</label>
+                                <label>Mô tả</label>
                                 <textarea class="form-control" id="editMota" name="mota" rows="3"></textarea>
                             </div>
                         </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <label>Đặc điểm Sinh học Sinh thái</label>
+                                <textarea class="form-control" id="editSinhHocSinhThai" name="shst" rows="3"></textarea>
+                            </div>
+                        </div>
+<!--                        <div class="row mt-2">-->
+<!--                            <div class="col-md-6">-->
+<!--                                <label>Đặc điểm Sinh thái</label>-->
+<!--                                <textarea class="form-control" id="editSinhThai" name="sinhThai" rows="3"></textarea>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <label>Nguồn dẫn tài liệu</label>
+                                <textarea class="form-control" id="editNguonDanTL" name="nguonDanTL" rows="3"></textarea>
+                            </div>
+                        </div>
+
+<!--                        <div class="row mt-2">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <label>Giá trị bảo tồn</label>-->
+<!--                                <input type="text" class="form-control" id="editGtbt" name="gtbt">-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="row mt-2">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <label>Nguồn dẫn tài liệu</label>-->
+<!--                                <textarea class="form-control" id="editNguonDanTL" name="nguonDanTL" rows="3"></textarea>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+
 
                         <div class="row mt-2">
                             <div class="col-md-6">
@@ -793,6 +861,11 @@
             document.getElementById("editHo").value = this.getAttribute("data-ho");
             document.getElementById("editChi").value = this.getAttribute("data-chi");
             document.getElementById("editLoai").value = this.getAttribute("data-loai");
+            document.getElementById("editSinhHocSinhThai").value = this.getAttribute("data-shst");
+            // document.getElementById("editSinhThai").value = this.getAttribute("data-sinhThai");
+            // document.getElementById("editGtsd").value = this.getAttribute("data-gtsd");
+            // document.getElementById("editGtbt").value = this.getAttribute("data-gtbt");
+            document.getElementById("editNguonDanTL").value = this.getAttribute("data-nguonDanTL");
             document.getElementById("editTinhTrangBaoTon").value = this.getAttribute("data-tinhtrangbaoton");
             document.getElementById("editMota").value = this.getAttribute("data-mota");
 

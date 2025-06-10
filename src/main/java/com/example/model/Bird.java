@@ -16,7 +16,6 @@ public class Bird {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String ten;
     private String gioi;
     private String nganh;
@@ -25,11 +24,14 @@ public class Bird {
     private String ho;
     private String chi;
     private String loai;
-
     @Column(columnDefinition = "TEXT")
     private String mota;
-
+    @Column(columnDefinition = "TEXT")
     private String tinhTrangBaoTon;
+    private String shst;
+    @Column(columnDefinition = "TEXT")
+    private String nguonDanTL;
+    private String nguoiCapNhat;
 
     @OneToMany(mappedBy = "bird", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @OrderBy("stt ASC")

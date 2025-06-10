@@ -5,6 +5,7 @@ import com.example.model.Bird;
 import com.example.model.Image;
 import com.example.service.BirdService;
 import com.example.service.ImageService;
+import com.example.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -76,6 +77,8 @@ public class BirdController {
             , @RequestParam("imageFile2") MultipartFile imageFile2
             , @RequestParam("imageFile3") MultipartFile imageFile3
             , @RequestParam("imageFile4") MultipartFile imageFile4) {
+        String userName = SecurityUtils.getCurrentUsername();
+        bird.setNguoiCapNhat(userName);
         Bird bird1 = birdService.saveBird(bird);
 
         try {
@@ -109,6 +112,8 @@ public class BirdController {
             , @RequestParam("imageFile4") MultipartFile imageFile4) {
         Bird existingBird = birdService.getBirdById(bird.getId());
         bird.setImages(existingBird.getImages());
+        String userName = SecurityUtils.getCurrentUsername();
+        bird.setNguoiCapNhat(userName);
         Bird bird1 = birdService.saveBird(bird);
         try {
             if(!imageFile.isEmpty()){

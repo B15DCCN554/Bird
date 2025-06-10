@@ -4174,12 +4174,16 @@
                 <td class="info-value" th:text="${bird.ho}">Họ</td>
             </tr>
             <tr class="info-row">
-                <td class="info-label">Chi<strong><em> (genus)</em></strong></td>
-                <td class="info-value" th:text="${bird.chi}">Chi</td>
+                <td class="info-label">Giống<strong><em> (genus)</em></strong></td>
+                <td class="info-value" th:text="${bird.chi}">Giống</td>
             </tr>
             <tr class="info-row">
                 <td class="info-label">Loài<strong><em> (species)</em></strong></td>
                 <td class="info-value" th:text="${bird.loai}">Loài</td>
+            </tr>
+            <tr class="info-row">
+                <td class="info-label">Mô tả</td>
+                <td class="info-value" th:text="${bird.mota}">Mô tả</td>
             </tr>
             <tr class="info-row">
                 <td class="info-label">Tình trạng bảo tồn</td>
@@ -4187,7 +4191,24 @@
             </tr>
             <tr class="info-row">
                 <td class="info-label">Đặc điểm Sinh học Sinh thái</td>
-                <td class="info-value" th:text="${bird.mota}">Mô tả về loài chim.</td>
+                <td class="info-value" th:text="${bird.shst}">Đặc điểm Sinh học Sinh thái.</td>
+            </tr>
+<!--            <tr class="info-row">-->
+<!--                <td class="info-label">Đặc điểm Sinh thái</td>-->
+<!--                <td class="info-value" th:text="${bird.sinhThai}">Đặc điểm Sinh thái.</td>-->
+<!--            </tr>-->
+<!--            <tr class="info-row">-->
+<!--                <td class="info-label">Giá trị sử dụng</td>-->
+<!--                <td class="info-value" th:text="${bird.gtsd}">Giá trị sử dụng.</td>-->
+<!--            </tr>-->
+            <tr class="info-row">
+                <td class="info-label">Nguồn dẫn tài liệu</td>
+                <td class="info-value" th:text="${bird.nguonDanTL}">Nguồn dẫn tài liệu.</td>
+            </tr>
+
+            <tr class="info-row">
+                <td class="info-label">Người cập nhật</td>
+                <td class="info-value" th:text="${bird.nguoiCapNhat}">Người cập nhật</td>
             </tr>
         </table>
     </div>
