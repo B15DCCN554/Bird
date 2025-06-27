@@ -7,6 +7,10 @@ server:
       force: true
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 16MB
+      max-request-size: 16MB
   application:
     name: demo
   datasource:
